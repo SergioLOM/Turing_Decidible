@@ -1,0 +1,6 @@
+C:\Users\sleon\Downloads\UCO\2020-1\COMPLEJIDAD DE ALGORITMOS\TuringDecidible\TuringDecidible\bin\Debug\TuringDecidible.exe.config
+C:\Users\sleon\Downloads\UCO\2020-1\COMPLEJIDAD DE ALGORITMOS\TuringDecidible\TuringDecidible\bin\Debug\TuringDecidible.exe
+C:\Users\sleon\Downloads\UCO\2020-1\COMPLEJIDAD DE ALGORITMOS\TuringDecidible\TuringDecidible\bin\Debug\TuringDecidible.pdb
+C:\Users\sleon\Downloads\UCO\2020-1\COMPLEJIDAD DE ALGORITMOS\TuringDecidible\TuringDecidible\obj\Debug\TuringDecidible.csprojAssemblyReference.cache
+C:\Users\sleon\Downloads\UCO\2020-1\COMPLEJIDAD DE ALGORITMOS\TuringDecidible\TuringDecidible\obj\Debug\TuringDecidible.exe
+C:\Users\sleon\Downloads\UCO\2020-1\COMPLEJIDAD DE ALGORITMOS\TuringDecidible\TuringDecidible\obj\Debug\TuringDecidible.pdb
