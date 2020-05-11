@@ -13,7 +13,7 @@ namespace TuringDecidible
         const char MARK = 'x';
         const char ZERO = '0';
         const char V = 'v';
-        static string pattern = @"^[0]*˽$";
+        static string pattern = @"^([0]*˽)|x˽$";
         static string input;
         static string originalInput;
         static string output;
@@ -36,10 +36,6 @@ namespace TuringDecidible
                 originalInput = Console.ReadLine();
                 input = originalInput;
                 input = input + "˽";
-                if (input.Equals(""))
-                {
-                    dataInput();
-                }
             } while (!Regex.IsMatch(input, pattern));
             start();
         }
