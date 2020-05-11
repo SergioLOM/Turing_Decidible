@@ -12,11 +12,16 @@ namespace TuringDecidible
         const char BLANK_SPACE = '˽';
         const char MARK = 'x';
         const char ZERO = '0';
+        const char V = 'v';
         static string pattern = @"^[0]*˽$";
         static string input;
+        static string originalInput;
         static string output;
+        static string downArrowString;
         static int pointer;
         static char[] inputTocharArray;
+        static char[] downArrowArray;
+
 
         static void Main(string[] arg)
         {
@@ -28,7 +33,8 @@ namespace TuringDecidible
             do
             {
                 Console.WriteLine("Enter a string of zeros (0^(2^n); n >= 0): ");
-                input = Console.ReadLine();
+                originalInput = Console.ReadLine();
+                input = originalInput;
                 input = input + "˽";
                 if (input.Equals(""))
                 {
@@ -48,16 +54,21 @@ namespace TuringDecidible
 
         private static void q1() 
         {
+            createBlankArray();
             if (inputTocharArray[pointer] == ZERO)
             {
                 inputTocharArray[pointer] = BLANK_SPACE;
+                downArrowArray[pointer] = V;
                 pointer++;
+                printDownArrowString();
                 printString();
                 q2();
             }
             else if (inputTocharArray[pointer] == BLANK_SPACE || inputTocharArray[pointer] == MARK)
             {
+                downArrowArray[pointer] = V;
                 pointer++;
+                printDownArrowString();
                 printString();
                 qRejection();
             }
@@ -65,22 +76,29 @@ namespace TuringDecidible
 
         private static void q2() 
         {
+            createBlankArray();
             if (inputTocharArray[pointer] == ZERO)
             {
                 inputTocharArray[pointer] = MARK;
+                downArrowArray[pointer] = V;
                 pointer++;
+                printDownArrowString();
                 printString();
                 q3();
             }
             else if (inputTocharArray[pointer] == MARK)
             {
+                downArrowArray[pointer] = V;
                 pointer++;
-                //printString();
+                printDownArrowString();
+                printString();
                 q2();
             }
             else if (inputTocharArray[pointer] == BLANK_SPACE)
             {
+                downArrowArray[pointer] = V;
                 pointer++;
+                printDownArrowString();
                 printString();
                 qAccenptance();
             }
@@ -88,61 +106,80 @@ namespace TuringDecidible
 
         private static void q3() 
         {
+            createBlankArray();
             if (inputTocharArray[pointer] == ZERO)
             {
+                downArrowArray[pointer] = V;
                 pointer++;
-                //printString();
+                printDownArrowString();
+                printString();
                 q4();
             }
             else if (inputTocharArray[pointer] == MARK)
             {
+                downArrowArray[pointer] = V;
                 pointer++;
-                //printString();
+                printDownArrowString();
+                printString();
                 q3();
             }
             else if (inputTocharArray[pointer] == BLANK_SPACE)
             {
+                downArrowArray[pointer] = V;
                 pointer--;
-                //printString();
+                printDownArrowString();
+                printString();
                 q5();
             }
         }
 
         private static void q4() 
         {
+            createBlankArray();
             if (inputTocharArray[pointer] == ZERO)
             {
                 inputTocharArray[pointer] = MARK;
+                downArrowArray[pointer] = V;
                 pointer++;
+                printDownArrowString();
                 printString();
                 q3();
             }
             else if (inputTocharArray[pointer] == MARK)
             {
+                downArrowArray[pointer] = V;
                 pointer++;
-                //printString();
+                printDownArrowString();
+                printString();
                 q4();
             }
             else if (inputTocharArray[pointer] == BLANK_SPACE)
             {
+                downArrowArray[pointer] = V;
                 pointer++;
-                //printString();
+                printDownArrowString();
+                printString();
                 qRejection();
             }
         }
 
         private static void q5()
         {
+            createBlankArray();
             if (inputTocharArray[pointer] == ZERO || inputTocharArray[pointer] == MARK)
             {
+                downArrowArray[pointer] = V;
                 pointer--;
-                //printString();
+                printDownArrowString();
+                printString();
                 q5();
             }
             else if (inputTocharArray[pointer] == BLANK_SPACE)
             {
+                downArrowArray[pointer] = V;
                 pointer++;
-                //printString();
+                printDownArrowString();
+                printString();
                 q2();
             }
         }
@@ -150,18 +187,16 @@ namespace TuringDecidible
         private static void qAccenptance() 
         {
             Console.WriteLine("\nString accepted!!!");
-            printString();
+            Console.WriteLine(originalInput);
             Console.ReadKey();
         }
 
         private static void qRejection() 
         {
             Console.WriteLine("\nString rejected!!!");
-            printString();
+            Console.WriteLine(originalInput);
             Console.ReadKey();
         }
-
-  
 
         private static void printString()
         {
@@ -170,10 +205,22 @@ namespace TuringDecidible
             {
                 output = output + inputTocharArray[i];
             }
-            Console.WriteLine("\n" + output);
+            Console.WriteLine(output);
         }
 
- 
+        private static void printDownArrowString()
+        {
+            downArrowString = "";
+            for (int i = 0; i < (downArrowArray.Length); i++)
+            {
+                downArrowString = downArrowString + downArrowArray[i];
+            }
+            Console.WriteLine("\n" + downArrowString);
+        }
 
+        private static void createBlankArray()
+        {
+            downArrowArray = new char[input.Length];
+        }
     }
 }
