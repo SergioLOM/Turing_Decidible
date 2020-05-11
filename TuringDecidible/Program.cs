@@ -12,11 +12,12 @@ namespace TuringDecidible
         const char BLANK_SPACE = '˽';
         const char MARK = 'x';
         const char ZERO = '0';
-        public static string pattern = @"^[0]*˽$";
+        static string pattern = @"^[0]*˽$";
         static string input;
         static string output;
         static int pointer;
         static char[] inputTocharArray;
+
         static void Main(string[] arg)
         {
             dataInput();
@@ -26,7 +27,7 @@ namespace TuringDecidible
         {
             do
             {
-                Console.WriteLine("Enter a string of zeros: ");
+                Console.WriteLine("Enter a string of zeros (0^(2^n); n >= 0): ");
                 input = Console.ReadLine();
                 input = input + "˽";
                 if (input.Equals(""))
@@ -34,10 +35,10 @@ namespace TuringDecidible
                     dataInput();
                 }
             } while (!Regex.IsMatch(input, pattern));
-            start(input);
+            start();
         }
 
-        private static void start(string cadena)
+        private static void start()
         {
             pointer = 0;
             inputTocharArray = input.ToCharArray();
@@ -51,11 +52,13 @@ namespace TuringDecidible
             {
                 inputTocharArray[pointer] = BLANK_SPACE;
                 pointer++;
+                printString();
                 q2();
             }
             else if (inputTocharArray[pointer] == BLANK_SPACE || inputTocharArray[pointer] == MARK)
             {
                 pointer++;
+                printString();
                 qRejection();
             }
         }
@@ -66,16 +69,19 @@ namespace TuringDecidible
             {
                 inputTocharArray[pointer] = MARK;
                 pointer++;
+                printString();
                 q3();
             }
             else if (inputTocharArray[pointer] == MARK)
             {
                 pointer++;
+                //printString();
                 q2();
             }
             else if (inputTocharArray[pointer] == BLANK_SPACE)
             {
                 pointer++;
+                printString();
                 qAccenptance();
             }
         }
@@ -85,16 +91,19 @@ namespace TuringDecidible
             if (inputTocharArray[pointer] == ZERO)
             {
                 pointer++;
+                //printString();
                 q4();
             }
             else if (inputTocharArray[pointer] == MARK)
             {
                 pointer++;
+                //printString();
                 q3();
             }
             else if (inputTocharArray[pointer] == BLANK_SPACE)
             {
                 pointer--;
+                //printString();
                 q5();
             }
         }
@@ -105,16 +114,19 @@ namespace TuringDecidible
             {
                 inputTocharArray[pointer] = MARK;
                 pointer++;
+                printString();
                 q3();
             }
             else if (inputTocharArray[pointer] == MARK)
             {
                 pointer++;
+                //printString();
                 q4();
             }
             else if (inputTocharArray[pointer] == BLANK_SPACE)
             {
                 pointer++;
+                //printString();
                 qRejection();
             }
         }
@@ -124,38 +136,41 @@ namespace TuringDecidible
             if (inputTocharArray[pointer] == ZERO || inputTocharArray[pointer] == MARK)
             {
                 pointer--;
+                //printString();
                 q5();
             }
             else if (inputTocharArray[pointer] == BLANK_SPACE)
             {
                 pointer++;
+                //printString();
                 q2();
             }
         }
 
         private static void qAccenptance() 
         {
-            Console.WriteLine("String accepted!!!");
+            Console.WriteLine("\nString accepted!!!");
             printString();
-            Console.WriteLine("\n" + output);
             Console.ReadKey();
         }
 
         private static void qRejection() 
         {
-            Console.WriteLine("String rejected!!!");
+            Console.WriteLine("\nString rejected!!!");
             printString();
-            Console.WriteLine("\n" + output);
             Console.ReadKey();
         }
+
+  
 
         private static void printString()
         {
             output = "";
-            for(int i = 0; i < inputTocharArray.Length; i++)
+            for(int i = 0; i < (inputTocharArray.Length); i++)
             {
                 output = output + inputTocharArray[i];
             }
+            Console.WriteLine("\n" + output);
         }
 
  
