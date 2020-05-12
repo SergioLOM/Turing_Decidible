@@ -13,7 +13,7 @@ namespace TuringDecidible
         const char MARK = 'x';
         const char ZERO = '0';
         const char V = 'v';
-        static string pattern = @"^([0]*˽)|x˽$";
+        static string pattern = @"^([0]*˽)$|^([x]*˽)$";
         static string input;
         static string originalInput;
         static string output;
@@ -32,7 +32,8 @@ namespace TuringDecidible
         {
             do
             {
-                Console.WriteLine("Enter a string of zeros (0^(2^n); n >= 0): ");
+                Console.Clear();
+                Console.WriteLine("Enter a string of zeros: ");
                 originalInput = Console.ReadLine();
                 input = originalInput;
                 input = input + "˽";
@@ -45,7 +46,6 @@ namespace TuringDecidible
             pointer = 0;
             inputTocharArray = input.ToCharArray();
             q1();
-            
         }
 
         private static void q1() 
